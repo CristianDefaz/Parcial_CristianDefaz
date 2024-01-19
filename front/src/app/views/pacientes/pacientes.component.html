@@ -1,0 +1,62 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+      <hr />
+      <button class="btn btn-primary" routerLink="/nuevo-paciente">Nuevo</button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Edad</th>
+              <th>Enfermedad</th>
+              <th>Fecha Ingreso</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (paciente of pacientes; track paciente.ID_paciente; let i =
+            $index) {
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{ paciente.Nombre }}</td>
+              <td>{{ paciente.Edad }}</td>
+              <td>{{ paciente.Enfermedad }}</td>
+              <td>{{ paciente.Fecha_ingreso }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-outline-warning"
+                  routerLink="/editar-paciente/{{paciente.ID_paciente}}"
+                >
+                  Editar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  (click)="eliminar(paciente.ID_paciente)"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+            }@empty {
+            <tr>
+              <td colspan="5">No existen registros</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <button (click)="alerta()">mensaje</button>
+  

@@ -1,0 +1,59 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="paciente" (ngSubmit)="grabar()">
+        <div class="mb-2">
+          <label for="Nombre">Nombre paciente</label>
+          <input type="text" class="form-control" formControlName="Nombre" />
+          @if (paciente.invalid && (paciente.dirty || paciente.touched)) {
+          <div class="alert">
+            @if (paciente.errors?.["required"]) {
+            <div class="ng-invalid">Nombres es requerido</div>
+            }
+          </div>
+          }
+        </div>
+
+
+        <div class="mb-2">
+            <label for="Edad">Edad</label>
+            <input type="text" class="form-control" formControlName="Edad" />
+            @if (paciente.invalid && (paciente.dirty || paciente.touched)) {
+            <div class="alert">
+              @if (paciente.errors?.["required"]) {
+              <div class="ng-invalid">Edad es requerido</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="mb-2">
+            <label for="Enfermedad">Enfermedad</label>
+            <input type="text" class="form-control" formControlName="Enfermedad" />
+            @if (paciente.invalid && (paciente.dirty || paciente.touched)) {
+            <div class="alert">
+              @if (paciente.errors?.["required"]) {
+              <div class="ng-invalid">Enfermedad es requerido</div>
+              }
+            </div>
+            }
+          </div>
+  
+        <div class="mb-2">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!paciente.valid"
+          >
+            Grabar
+          </button>
+          <button class="btn btn-secondary" routerLink="/pacientes">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
