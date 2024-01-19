@@ -1,1 +1,65 @@
-<p>nuevo-tratamiento works!</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="tratamiento" (ngSubmit)="grabar()">
+        <div class="mb-2">
+          <label for="ID_paciente">Paciente </label>
+
+          <select class="form-control" formControlName="ID_paciente">
+            <option value="0">Seleccione una opcion </option>
+            @for (paciente of pacienteLista; track paciente.ID_paciente){
+                <option [value]="paciente.ID_paciente">{{paciente.Nombre}}</option>
+            }
+          </select>
+          @if (tratamiento.invalid && (tratamiento.dirty || tratamiento.touched)) {
+          <div class="alert">
+            @if (tratamiento.errors?.["required"]) {
+            <div class="ng-invalid">Paciente es requerido</div>
+            }
+          </div>
+          }
+        </div>
+
+
+        <div class="mb-2">
+            <label for="Tipo_tratamiento">Tipo de tratamiento</label>
+            <input type="text" class="form-control" formControlName="Tipo_tratamiento" />
+            @if (tratamiento.invalid && (tratamiento.dirty || tratamiento.touched)) {
+            <div class="alert">
+              @if (tratamiento.errors?.["required"]) {
+              <div class="ng-invalid">Tipo de tratamiento es requerido</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="mb-2">
+            <label for="Costo">Costo</label>
+            <input type="text" class="form-control" formControlName="Costo" />
+            @if (tratamiento.invalid && (tratamiento.dirty || tratamiento.touched)) {
+            <div class="alert">
+              @if (tratamiento.errors?.["required"]) {
+              <div class="ng-invalid">Costo es requerido</div>
+              }
+            </div>
+            }
+          </div>
+  
+        <div class="mb-2">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!tratamiento.valid"
+          >
+            Grabar
+          </button>
+          <button class="btn btn-secondary" routerLink="/tratamientos">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

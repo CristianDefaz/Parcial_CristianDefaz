@@ -12,6 +12,9 @@ constructor(private clientePhp: HttpClient) {}
 todos(): Observable<Pacientes[]> {
   return this.clientePhp.get<Pacientes[]>(this.urlBase + 'todos');
 }
+todos1(): Observable<Pacientes[]> {
+  return this.clientePhp.get<Pacientes[]>(this.urlBase + 'todos1');
+}
 insertar(paciente: Pacientes): Observable<any> {
   var prov = new FormData();
   prov.append('Nombre', paciente.Nombre);

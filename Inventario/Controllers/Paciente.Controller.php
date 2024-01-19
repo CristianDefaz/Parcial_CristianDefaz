@@ -19,7 +19,14 @@ switch ($_GET["op"]) {
         }
         echo json_encode($todos); //devuelvo el arreglo en formato json
         break;
-   
+        case 'todos1':
+            $datos = array(); //defino un arreglo
+            $datos = $pacientes->todos1(); //llamo al modelo de usuarios e invoco al procedimiento todos y almaceno en una variable
+            while ($fila = mysqli_fetch_assoc($datos)) { //recorro el arreglo de datos
+                $todos[] = $fila;
+            }
+            echo json_encode($todos); //devuelvo el arreglo en formato json
+            break;
         case "uno":
             $ID_paciente = $_POST["ID_paciente"]; //defino una variable para almacenar el id del usuario, la variable se obtiene mediante POST
             $datos = array(); //defino un arreglo

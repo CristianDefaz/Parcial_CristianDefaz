@@ -7,7 +7,7 @@ class Clase_Tratamiento
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "SELECT * FROM `tratamientos`";
+            $cadena = "SELECT tratamientos.*,pacientes.Nombre as pacientes From tratamientos INNER JOIN pacientes on tratamientos.ID_paciente= pacientes.ID_paciente";
             $result = mysqli_query($con, $cadena);
             return $result;
         } catch (Throwable $th) {
@@ -16,6 +16,7 @@ class Clase_Tratamiento
             $con->close();
         }
     }
+
     public function uno($ID_tratamiento)
     {
         try {
@@ -49,7 +50,7 @@ class Clase_Tratamiento
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "UPDATE `tratamientos` SET `ID_paciente`='$ID_paciente',`Tipo_tratamiento`='$Tipo_tratamiento',`Costo`='$Costo',`Fecha_inicio`='GETDATE()' WHERE `ID_tratamiento `=$ID_tratamiento";
+            $cadena = "UPDATE `tratamientos` SET `ID_paciente`='$ID_paciente',`Tipo_tratamiento`='$Tipo_tratamiento',`Costo`='$Costo',`Fecha_inicio`=CURDATE() WHERE `ID_tratamiento`=$ID_tratamiento";
             $result = mysqli_query($con, $cadena);
             return "ok";
         } catch (Throwable $th) {

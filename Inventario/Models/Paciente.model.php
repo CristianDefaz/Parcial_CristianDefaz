@@ -16,6 +16,22 @@ class Clase_Paciente
             $con->close();
         }
     }
+
+    public function todos1()
+    {
+        try {
+            $con = new Clase_Conectar_Base_Datos();
+            $con = $con->ProcedimientoConectar();
+            $cadena = "SELECT pacientes.* FROM pacientes LEFT JOIN tratamientos ON pacientes.ID_paciente = tratamientos.ID_paciente WHERE tratamientos.ID_paciente IS NULL";
+            $result = mysqli_query($con, $cadena);
+            return $result;
+        } catch (Throwable $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
+    }
+  
     public function uno($ID_paciente)
     {
         try {
